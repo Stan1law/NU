@@ -1,0 +1,86 @@
+Check for empty input: You can check if the user has entered any input for each field. If the input is empty, you can prompt the user to enter a value.
+if (studentNumber.isEmpty()) {
+    System.out.println("Please enter a student number.");
+    studentNumber = scanner.nextLine();
+}
+
+Check for valid age: You can check if the age entered by the user is within a valid range (e.g., between 18 and 100).
+if (studentAge < 18 || studentAge > 100) {
+    System.out.println("Please enter a valid age (between 18 and 100).");
+    studentAge = Integer.parseInt(scanner.nextLine());
+}
+
+Check for valid gender: You can check if the gender entered by the user is either "M" or "F".
+if (!studentGender.equalsIgnoreCase("M") && !studentGender.equalsIgnoreCase("F")) {
+    System.out.println("Please enter a valid gender (M or F).");
+    studentGender = scanner.nextLine();
+}
+
+Check for duplicate student numbers: You can check if a student with the same number already exists in the studentsRecord map.
+if (studentsRecord.containsKey(studentNumber)) {
+    System.out.println("A student with this number already exists.");
+    // You can either prompt the user to enter a different number or update the existing student's record.
+}
+
+You can add a validation to check if the student number matches the format "YYYY-XXXXXXXX", where "YYYY" is a 4-digit year and "XXXXXXXX" is an 8-digit number.
+private static boolean isValidStudentNumber(String studentNumber) {
+    String pattern = "^\\d{4}-\\d{8}$";
+    return studentNumber.matches(pattern);
+}
+In this code, ^ matches the start of the string, \\d{4} matches exactly 4 digits, - matches the hyphen, \\d{8} matches exactly 8 digits, and $ matches the end of the string.
+
+if (!isValidStudentNumber(studentNumber)) {
+    System.out.println("Please enter a valid student number in the format YYYY-XXXXXXXX.");
+    studentNumber = scanner.nextLine();
+}
+
+Here's a breakdown of the regular expression used:
+
+^ matches the start of the string
+\\d{4} matches exactly 4 digits (the year)
+- matches the hyphen
+\\d{8} matches exactly 8 digits (the student ID)
+$ matches the end of the string
+This regular expression will match strings like "2024-10799671", but not strings like "2024-107996" or "2024-107996711".
+
+for (StudentRecord studentRecord : studentsRecord.values()) {
+    // ...
+}
+studentsRecord is a Map (a data structure that stores key-value pairs).
+values() is a method of the Map interface that returns a Collection of all the values in the map. In this case, the values are StudentRecord objects.
+The for loop is using a syntax called "enhanced for loop" or "foreach loop". It's a shorthand way to iterate over a collection of objects.
+Here's how it works:
+
+The for loop iterates over the Collection of StudentRecord objects returned by studentsRecord.values().
+On each iteration, the loop assigns the current StudentRecord object to the variable studentRecord.
+The loop body is executed for each StudentRecord object in the collection.
+The :values() part is where the magic happens. It's called the "expression" part of the foreach loop. It's evaluated once, before the loop starts, and it returns a Collection of objects. The loop then iterates over this collection.
+
+In this specific case, studentsRecord.values() returns a Collection of StudentRecord objects, which are the values stored in the studentsRecord map. The loop then iterates over these objects, assigning each one to the studentRecord variable.
+
+Here's an equivalent way to write the loop using a traditional for loop:
+Collection<StudentRecord> studentRecords = studentsRecord.values();
+for (int i = 0; i < studentRecords.size(); i++) {
+    StudentRecord studentRecord = studentRecords.get(i);
+    // ...
+}
+Reference the PracticalJava File
+
+Let's break down the logic behind the array in the code.
+
+Array Initialization
+String[] tasks = new String[0];
+Here, we create a new array of strings called tasks with an initial size of 0. This means that the array has no elements yet.
+
+Array Expansion
+tasks = Arrays.copyOf(tasks, tasks.length + 1);
+
+When the user chooses to add a task, we use the Arrays.copyOf method to create a new array with a size that is one more than the current size of the tasks array. This effectively "expands" the array to accommodate the new task.
+
+Adding an Element to the Array
+tasks[tasks.length - 1] = scanner.nextLine();
+When the user chooses to add a task, we use the Arrays.copyOf method to create a new array with a size that is one more than the current size of the tasks array. This effectively "expands" the array to accommodate the new task.
+
+Adding an Element to the Array
+tasks[tasks.length - 1] = scanner.nextLine();
+After expanding the array, we add the new task to the last index of the array using the tasks.length - 1 syntax. This is because arrays in Java are 0-indexed, meaning that the first element is at index 0, and the last element is at index length - 1.  
